@@ -1,0 +1,101 @@
+Sys.setlocale(category = "LC_ALL", locale = "Russian")
+# сложение
+2 + 6
+# вычитание
+6 - 2
+# умножение
+6 * 2
+# деление
+6 / 2
+# степень
+2 ^ 3
+# взятие корня
+sqrt(9) 
+#возведение в степень
+3 ^ 2
+# присвоение переменной значения: числовое
+x <- 2
+y = 3.5
+x + y 
+# текстовое
+me <- "Сева"
+val <- 10
+
+ls <- 1
+
+# вектор текстовый
+students <- c("Вася", "Петя", "Маша", "Коля", "Женя", "Эдуард")
+length(students)
+typeof(students)
+# числовой вектор
+height <- c(180, 185, 170, 182, 168, 198)
+length(height)
+ls()
+rm(students)
+rm(list = ls())
+# именованный вектор
+names(height) <- students
+height
+names(height)
+# обращение к элементу
+height[1]
+h1 <- height[1 : 3] + 20
+height[-1]
+height[-1:-3]
+height[c(-1,-3)]
+#преобразование wide-long
+stack(height)
+
+# простые статистики
+max(height)
+min(height)
+mean(height)
+var(height)
+sd(height)
+# сортировка
+sort(height)
+sort(height, decreasing = TRUE)
+sort(height, decreasing = TRUE)[1]
+
+maxval <- function(x){
+  mv <- sort(x, decreasing = T)[1:3]
+  print(mv)
+}
+
+maxval(height)
+
+
+which(height == max(height))
+
+
+# выборка 
+height >= 180
+mask_180 <- height >= 180
+height[mask_180]
+height[height >= 200]
+
+
+# цикл по элементам вектор
+for (i in students){
+  print(i)
+}
+for (k in height) {
+  print(k + 100)
+}
+
+# сделать матрицу 3х3, последовательно заполненную числами от 1 до 9
+matrix(1:9, byrow = TRUE, nrow = 3) # byrow - вид заполнения, по строкам или по столбцам
+matrix(1:9, byrow = FALSE, nrow = 3)
+mat <- matrix(1:9, byrow = TRUE, nrow = 3)
+mat[2,3]
+matrix(1:12, byrow = FALSE, nrow = 4)
+
+seq(0, 1, 0.2)
+
+set.seed(1234567)
+rnorm(n = 9, mean = 0, sd = 1)
+set.seed(1234567)
+matrix(rnorm(n = 9, mean = 0, sd = 1), byrow = TRUE, nrow = 3)
+
+
+

@@ -41,7 +41,8 @@ my_list[[1]][2]
 my_df <- data.frame(id = 1:30, 
                     a = rnorm(30, 0, 1), 
                     b = rnorm(30, 15, 1), 
-                    c = rnorm(30, 30, 1))
+                    c = rnorm(30, 30, 1), 
+                    d = 'L')
 my_df
 View(my_df)
 class(my_df)
@@ -52,27 +53,31 @@ summary(my_df)
 my_df$c <- my_df$c + 4
 my_df$c
 
-my_df[,2]
+my_df[,1]
 my_df[1,]
 
 my_df$a[5] <- NA
 my_df
+mean(x = my_df$a, na.rm = T)
+is.na(my_df$a)
 my_df$a[is.na(my_df$a)] <- 5
 my_df
 
 # преобразование из широкого в длинный формат
 install.packages("reshape2")
 library(reshape2)
-my_df_long <- melt(my_df, id.vars = 'id')
+my_df_long <- melt(my_df[,-5], id.vars = 'id')
 my_df_long
 
 # графика
+install.packages("ggplot2")
 library(ggplot2)
 ggplot(my_df_long, aes(x=value, fill=variable)) + 
   stat_density(alpha = 0.9)
 
 ggplot(my_df_long, aes(x=id, y=value, col=variable)) +
-  geom_line() + geom_point()
+  geom_line() +
+  geom_point() 
 
 # факторы
 my_df_long$variable <- factor(my_df_long$variable)
@@ -95,8 +100,9 @@ ggplot(my_df_long, aes(x=id, y=value, col=variable)) +
 
 
 # запись/чтение в/из файл(ов) с разделителем-запятой
-write.csv(new_df, file = 'my_df.csv', sep = ";")
 getwd()
+write.csv2(my_df, file = 'my_df.csv', sep = '\t', quote = F)
+
 write.csv(my_df, file = 'my_df.csv', quote = FALSE, row.names = F)
 
 new_df <- read.csv('my_df.csv')

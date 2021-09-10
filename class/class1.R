@@ -26,7 +26,7 @@ ls <- 1
 # вектор текстовый
 students <- c("Вася", "Петя", "Маша", "Коля", "Женя", "Эдуард")
 length(students)
-typeof(students)
+class(students)
 # числовой вектор
 height <- c(180, 185, 170, 182, 168, 198)
 length(height)
@@ -43,8 +43,6 @@ h1 <- height[1 : 3] + 20
 height[-1]
 height[-1:-3]
 height[c(-1,-3)]
-#преобразование wide-long
-stack(height)
 
 # простые статистики
 max(height)
@@ -56,14 +54,6 @@ sd(height)
 sort(height)
 sort(height, decreasing = TRUE)
 sort(height, decreasing = TRUE)[1]
-
-maxval <- function(x){
-  mv <- sort(x, decreasing = T)[1:3]
-  print(mv)
-}
-
-maxval(height)
-
 
 which(height == max(height))
 

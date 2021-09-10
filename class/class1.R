@@ -57,13 +57,20 @@ sort(height, decreasing = TRUE)[1]
 
 which(height == max(height))
 
-
 # выборка 
 height >= 180
 mask_180 <- height >= 180
+mask_180
+typeof(mask_180)
 height[mask_180]
 height[height >= 200]
 
+# функция
+maxval <- function(x){
+  mv <- sort(x, decreasing = T)[1:3]
+  print(mv)
+}
+maxval(height)
 
 # цикл по элементам вектор
 for (i in students){
@@ -72,6 +79,17 @@ for (i in students){
 for (k in height) {
   print(k + 100)
 }
+
+# apply
+sapply(height, FUN = function(x) x+2)
+
+# приведение типов
+num <- c(1, 4, 7)
+nom <- c(1, 4, '7')
+typeof(num)
+typeof(nom)
+nom <- as.integer(nom)
+typeof(nom)
 
 # сделать матрицу 3х3, последовательно заполненную числами от 1 до 9
 matrix(1:9, byrow = TRUE, nrow = 3) # byrow - вид заполнения, по строкам или по столбцам

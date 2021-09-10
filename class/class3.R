@@ -1,12 +1,12 @@
 Sys.setlocale("LC_ALL","Russian")
 library(readxl)
-setwd('d:/YandexDisk/ИВПРАН/R forecasts')
-df <- read_xlsx('oka.xlsx')
+setwd('d:/YandexDisk/РР’РџР РђРќ/R forecasts')
+df <- read_xlsx('data/oka.xlsx')
 summary(df)
 head(df, 10)
 tail(df, 10)
 
-# отсутствующие данные
+# РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‰РёРµ РґР°РЅРЅС‹Рµ
 df <- df[-4, ]
 df <- na.omit(df)
 
@@ -23,7 +23,7 @@ df$side <- factor(df$side)
 levels(df$side)
 plot(x = df$side, y = df$area)
 
-df$size <- cut(df$area, labels = c('малая','средняя','крупная'), 
+df$size <- cut(df$area, labels = c('РјР°Р»Р°СЏ','СЃСЂРµРґРЅСЏСЏ','РєСЂСѓРїРЅР°СЏ'), 
                breaks = c(0, 3500, 10000, 100000), ordered_result = T)
 plot(x = df$size, y = df$len)
 
@@ -38,8 +38,8 @@ ggplot(df, aes(x=len, y=area)) + geom_point(size=5) +
 area_model <- lm(data = df, formula = area ~ len)
 df$pred_area <- predict(area_model)
 
-ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
-  geom_line(aes(y=pred_area, col='Модель'), size=5) +
+ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Р¤Р°РєС‚'), size=5) +
+  geom_line(aes(y=pred_area, col='РњРѕРґРµР»СЊ'), size=5) +
   geom_text(aes(x = 100, y=40000, label=))
 
 coef_a <- as.character(round(coef(area_model)[2], 2))
@@ -49,8 +49,8 @@ cor_coef <- as.character(round(cor(df$area, df$pred_area), 2))
 model_text <- paste("y = ", coef_a, " * x ", coef_b, ", R = ", cor_coef)
 model_text
 
-p <- ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
-  geom_line(aes(y=pred_area, col='Модель'), size=5) +
+p <- ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Р¤Р°РєС‚'), size=5) +
+  geom_line(aes(y=pred_area, col='РњРѕРґРµР»СЊ'), size=5) +
   geom_text(aes(x = 100, y=40000, label=model_text))
 p
 ggsave(plot = p, filename = 'linear_model.png', device = 'png', 

@@ -56,12 +56,15 @@ my_df[,2]
 my_df[1,]
 
 my_df$a[5] <- NA
-
+my_df
+my_df$a[is.na(my_df$a)] <- 5
+my_df
 
 # преобразование из широкого в длинный формат
 install.packages("reshape2")
 library(reshape2)
 my_df_long <- melt(my_df, id.vars = 'id')
+my_df_long
 
 # графика
 library(ggplot2)
@@ -95,7 +98,6 @@ ggplot(my_df_long, aes(x=id, y=value, col=variable)) +
 write.csv(new_df, file = 'my_df.csv', sep = ";")
 getwd()
 write.csv(my_df, file = 'my_df.csv', quote = FALSE, row.names = F)
-setwd('D:/YandexDisk/ИВПРАН/R forecasts/2020')
 
 new_df <- read.csv('my_df.csv')
 

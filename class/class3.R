@@ -8,25 +8,26 @@ tail(df, 10)
 
 # отсутствующие данные
 df <- df[-4, ]
-df <- na.omit(df)
-
+clean_df <- na.omit(df)
+# базовая графика
 plot(x = df$dist, y = df$len)
 plot(x = df$dist, y = df$area)
-
+plot(x = df$len, y = df$area)
+#гистограммы
 hist(df$area)
-hist(df$area, labels = T, breaks = 3)
+hist(df$area, labels = T, breaks = 10)
 hist(df$area, freq = F)
 hist(df$area, plot = F)
-
+# факторы
 plot(x = df$side, y = df$area)
 df$side <- factor(df$side)
 levels(df$side)
 plot(x = df$side, y = df$area)
-
+# создание факторов разбиением
 df$size <- cut(df$area, labels = c('малая','средняя','крупная'), 
                breaks = c(0, 3500, 10000, 100000), ordered_result = T)
 plot(x = df$size, y = df$len)
-
+# графика ggplot
 library(ggplot2)
 ggplot(df, aes(x=size, y=len, col=size)) + geom_boxplot() + 
   stat_boxplot(geom = 'errorbar') 
@@ -34,7 +35,7 @@ ggplot(df, aes(x=area, fill=side)) + geom_histogram(binwidth = 10000, position =
 ggplot(df, aes(x=len, y=area, col=side)) + geom_point(size=5)
 ggplot(df, aes(x=len, y=area)) + geom_point(size=5) + 
   geom_smooth(method = 'lm', formula = y ~ x, se = F)
-
+# линейная аппроксимация
 area_model <- lm(data = df, formula = area ~ len)
 df$pred_area <- predict(area_model)
 

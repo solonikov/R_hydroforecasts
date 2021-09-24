@@ -1,22 +1,10 @@
 Sys.setlocale("LC_ALL","Russian")
-# произвольный датафрейм
-df <- data.frame(obs = rnorm(10),
-                 pred = rnorm(10))
-# новый столбец - последовательность дат
-newcol <- seq.Date(from = as.Date('2020-09-21'), by = '1 day', length.out = 10)
-newcol
-# добавляем к дф
-df <- cbind(df, newcol)
-df
-# новые данные - строка
-newrow <- c(rnorm(1), rnorm(1), '2020-10-01')
-newrow
-# добавляем и смотрим на тип данных, в который превратились столбцы дф
-df <- rbind(df, newrow)
+library(ggplot2)
 
-# правильный список для добавления
-newrow <- list(rnorm(1), rnorm(1), '2020-10-01')
-df <- rbind(df, newrow)
+kama <- read_xlsx('data/kama/kama_q.xlsx')
+
+ggplot(kama, aes(date, value, col=index)) + geom_line()
+
 
 setwd('d:/YandexDisk/ИВПРАН/R forecasts/байкал')
 # список файлов из рабочей директории определенного расширения

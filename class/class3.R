@@ -1,6 +1,28 @@
 Sys.setlocale("LC_ALL","Russian")
 library(readxl)
-setwd('d:/YandexDisk/ИВПРАН/R forecasts')
+
+# произвольный датафрейм
+df <- data.frame(obs = rnorm(10),
+                 pred = rnorm(10))
+# новый столбец - последовательность дат
+newcol <- seq.Date(from = as.Date('2021-09-21'), by = '1 day', length.out = 10)
+newcol
+# добавляем к дф
+df <- cbind(df, newcol)
+df
+# новые данные - строка
+newrow <- c(rnorm(1), rnorm(1), '2021-10-01')
+newrow
+# добавляем и смотрим на тип данных, в который превратились столбцы дф
+df <- rbind(df, newrow)
+
+# правильный список для добавления
+newrow <- list(rnorm(1), rnorm(1), '2021-10-01')
+df <- rbind(df, newrow)
+
+df$obs <- as.numeric(df$obs)
+
+# читаем данные из excel
 df <- read_xlsx('data/oka.xlsx')
 summary(df)
 head(df, 10)

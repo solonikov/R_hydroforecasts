@@ -35,6 +35,7 @@ df6 <- kama_long %>%
 df6 %>%
   group_by(index, year = year(date)) %>%
   summarise(vol = sum(w_km, na.rm = T)) %>%
+<<<<<<< HEAD
   ggplot(., aes(x=factor(year), y=vol, fill=factor(index))) + 
   geom_bar(stat='identity') +
   facet_wrap(index~., scales = 'free', ncol = 4)

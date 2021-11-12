@@ -4,11 +4,15 @@ library(RPostgreSQL)
 library(readxl)
 library(ggplot2)
 
+rivers_list <- read_xlsx('data/rivers/rivers_list.xlsx')
+
 # гидрология
-load('data/rivers/gmvo_data.RData')
+load('data/rivers/river_data.RData')
 # метеорология
 load('data/rivers/weather_data.RData')
 
+unique(river_data$index)
+unique(weather_data$index)
 # выбираем
 my_q <- river_data %>%
   filter(index == 78519)

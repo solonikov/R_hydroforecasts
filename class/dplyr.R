@@ -22,8 +22,12 @@ df4 <- kama_q %>%
   group_by(year = year(date)) %>%
   summarise(across(where(is.numeric), mean))
 
+<<<<<<< HEAD
 kama_long <- melt(kama_q, id.vars = 'date', 
                   variable_name = 'index')  
+=======
+kama_long <- melt(kama_q, id.vars = 'date', variable_name = 'index')  
+>>>>>>> 3f189fdf9e84ca1deda10aff3c47acd3a3a46561
 
 df5 <- kama_long %>%
   group_by(index) %>%
@@ -35,6 +39,10 @@ df6 <- kama_long %>%
 df6 %>%
   group_by(index, year = year(date)) %>%
   summarise(vol = sum(w_km, na.rm = T)) %>%
+<<<<<<< HEAD
   ggplot(., aes(x=factor(year), y=vol, fill=factor(index))) + 
   geom_bar(stat='identity') +
+=======
+  ggplot(., aes(x=factor(year), y=vol, fill=factor(index))) + geom_bar(stat='identity') +
+>>>>>>> 3f189fdf9e84ca1deda10aff3c47acd3a3a46561
   facet_wrap(index~., scales = 'free', ncol = 4)

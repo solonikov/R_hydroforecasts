@@ -2,6 +2,7 @@ Sys.setlocale("LC_ALL","Russian")
 library(dplyr)
 library(RPostgreSQL)
 library(readxl)
+library(reshape2)
 library(ggplot2)
 
 rivers_list <- read_xlsx('data/rivers/rivers_list.xlsx')
@@ -35,7 +36,7 @@ lag_df <- df %>% mutate_at(vars(q), funs_(lag_set))
 
 q_cor <- cor(select(lag_df, contains('q')), use = 'complete.obs')
 
-ggplot(melt(q_cor), aes(X1, X2, fill=value)) + geom_tile() + geom_text(aes(label=round(value, 2)), col='White')
+ggplot(melt(q_cor), aes(Var1, Var2, fill=value)) + geom_tile() + geom_text(aes(label=round(value, 2)), col='White')
 
 prec_lag_names <- paste('prec', sprintf(fmt = "%02d", lags), sep = "_")
 prec_lag_set <- setNames(paste("dplyr::lag(., ", lags, ")"), prec_lag_names)

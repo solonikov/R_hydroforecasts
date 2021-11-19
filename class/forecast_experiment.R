@@ -35,7 +35,8 @@ lag_names <- paste('q', sprintf(fmt = "%02d", lags), sep = "_")
 lag_set <- setNames(paste("dplyr::lag(., ", lags, ")"), lag_names)
 lag_df <- df %>% mutate_at(vars(q), funs_(lag_set))
 
-q_cor <- cor(select(lag_df, contains('q')), use = 'complete.obs')
+q_cor <- cor(select(lag_df, contains('q')), 
+             use = 'complete.obs')
 
 ggplot(melt(q_cor), aes(Var1, Var2, fill=value)) + 
   geom_tile() + 

@@ -30,7 +30,7 @@ df <- shift_data(df, shift)
 
 # анализ корреляции и автокорреляции
 acf(df$habs)
-acf(df$habs, plot = F)
+acf(df$habs, plot = F, lag.max = 7)
 
 # разделение на тренинг и тест
 ggplot(df, aes(x=Dates, y=habs)) + geom_line() + geom_point()

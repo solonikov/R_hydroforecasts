@@ -2,6 +2,7 @@ Sys.setlocale("LC_ALL","Russian")
 library(dplyr)
 library(RPostgreSQL)
 library(readxl)
+library(reshape2)
 library(ggplot2)
 library(reshape2)
 

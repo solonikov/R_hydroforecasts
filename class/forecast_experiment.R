@@ -5,7 +5,7 @@ library(readxl)
 library(ggplot2)
 
 # гидрология
-load('data/rivers/gmvo_data.RData')
+load('data/rivers/river_data.RData')
 # метеорология
 load('data/rivers/weather_data.RData')
 

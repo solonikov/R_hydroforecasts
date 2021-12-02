@@ -19,6 +19,9 @@ my_w <- weather_data %>%
 df <- merge(my_q, my_w, by = 'date', suffixes = c('_hydro', '_meteo'))
 ggplot(df, aes(x=date)) + geom_line(aes(y=q, col='Q')) + geom_bar(aes(y=prec, fill='P'), fill = 'Blue', stat = 'identity')
 
+# сохраняем исходные данные
+save(df, file = 'data/rivers/my_river_data.RData')
+
 # автокорреляция
 acf(df$q, na.action = na.pass)
 acf(df$prec, na.action = na.pass)

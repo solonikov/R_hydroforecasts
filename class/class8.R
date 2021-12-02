@@ -35,13 +35,15 @@ acf(df$habs, plot = F, lag.max = 7)
 # разделение на тренинг и тест
 ggplot(df, aes(x=Dates, y=habs)) + geom_line() + geom_point()
 
-train_df <- filter(df, year(Dates) > 2013 & year(Dates) < 2020)
+train_df <- filter(df, year(Dates) > 2013 & 
+                     year(Dates) < 2020)
 test_df <- filter(df, year(Dates) <= 2013)
 val_df <- filter(df, year(Dates) >= 2020)
-
+summary(train_df)
+summary(test_df)
 # построение множественной линейной регрессии
 
-mod <- lm(data = train_df[,-1], formula = `habs` ~ .)
+mod <- lm(data = train_df[,-1], formula = `habs` ~ `habs_7`)
 summary(mod)
 formula(mod)
 coef(mod)
@@ -54,12 +56,16 @@ NSE(obs = test_df$habs, sim = test_df$pred)
 ggplot(test_df, aes(x=Dates)) + geom_line(aes(y=habs, col='obs')) +
   geom_line(aes(y=pred, col='mod'))
 
-ggplot(test_df, aes(x=habs, y=pred)) + geom_point() + geom_abline() + geom_smooth(method = 'lm')
+ggplot(test_df, aes(x=habs, y=pred)) + 
+  geom_point() + geom_abline() + 
+  geom_smooth(method = 'lm') + xlim(117, 127) + 
+  ylim(117, 127)
 cor(test_df$pred, test_df$habs, use = "complete.obs")
 # предсказание в оперативном режиме
 
 val_df$pred <- predict(mod, newdata = val_df)
 
-ggplot(val_df, aes(x=Dates)) + geom_line(aes(y=habs, col='obs')) +
+ggplot(val_df, aes(x=Dates)) + 
+  geom_line(aes(y=habs, col='obs')) +
   geom_line(aes(y=pred, col='mod'))
 

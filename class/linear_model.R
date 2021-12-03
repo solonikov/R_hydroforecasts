@@ -45,8 +45,9 @@ summary(test_df)
 pred_q <- function(x, tau){
   tau <- 3
   x <- train_df
-  predictors <- colnames(x[,-c(1,2)])[tau:length(colnames(x))-tau]
-  formula <- as.formula(q ~ )
+  predictors <- paste(colnames(x[,-c(1,2)])[tau:(length(colnames(x[,-c(1,2)]))-tau)], collapse = '+')
+  predictors
+  formula <- as.formula(q ~ predictors)
   mod <- lm(data = x[,-c(1, 2)], 
              formula = q ~ q01 + q02 + q03 + q04 + q05 + q06 + q07)
   summary(mod1)
@@ -54,5 +55,3 @@ pred_q <- function(x, tau){
   coef(mod1)
   return(predict(mod1, test_df))
 }
-
-test_df$pred1 <- 

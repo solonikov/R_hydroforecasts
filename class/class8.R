@@ -19,7 +19,7 @@ shift_data <- function(x, shift){
     for(i in seq(1, shift, 1)){
       print(col)
       print(i)
-      col_lag <- paste0(col, '_', i)
+      col_lag <- paste0(col, i)
       x[[col_lag]] <- lag(x[[col]], n = i)
     }
   }
@@ -43,7 +43,7 @@ summary(train_df)
 summary(test_df)
 # построение множественной линейной регрессии
 
-mod <- lm(data = train_df[,-1], formula = `habs` ~ `habs_7`)
+mod <- lm(data = train_df[,-1], formula = habs ~ .)
 summary(mod)
 formula(mod)
 coef(mod)
@@ -53,7 +53,8 @@ test_df$pred <- predict(mod, newdata = test_df)
 library(hydroGOF)
 rmse(obs = test_df$habs, sim = test_df$pred)
 NSE(obs = test_df$habs, sim = test_df$pred)
-ggplot(test_df, aes(x=Dates)) + geom_line(aes(y=habs, col='obs')) +
+ggplot(test_df, aes(x=Dates)) + 
+  geom_line(aes(y=habs, col='obs')) +
   geom_line(aes(y=pred, col='mod'))
 
 ggplot(test_df, aes(x=habs, y=pred)) + 

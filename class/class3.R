@@ -15,7 +15,7 @@ newrow <- c(rnorm(1), rnorm(1), '2021-10-01')
 newrow
 # добавляем и смотрим на тип данных, в который превратились столбцы дф
 df <- rbind(df, newrow)
-
+str(df)
 # правильный список для добавления
 newrow <- list(rnorm(1), rnorm(1), '2021-10-01')
 df <- rbind(df, newrow)
@@ -23,7 +23,8 @@ df <- rbind(df, newrow)
 df$obs <- as.numeric(df$obs)
 
 # читаем данные из excel
-df <- read_xlsx('data/oka.xlsx')
+# setwd("/Volumes/T7/мои файлы с юлиного компьютера/R_hydroforecasts/Ivan_Solonikov")
+df <- read_xlsx('data/oka/oka.xlsx')
 summary(df)
 head(df, 10)
 tail(df, 10)
@@ -58,21 +59,21 @@ ggplot(df, aes(x=len, y=area, col=side)) + geom_point(size=5)
 ggplot(df, aes(x=len, y=area)) + geom_point(size=5) + 
   geom_smooth(method = 'lm', formula = y ~ x, se = F)
 # линейная аппроксимация
-area_model <- lm(data = df, formula = area ~ len)
-df$pred_area <- predict(area_model)
+area_model <- lm(data = clean_df, formula = area ~ len)
+clean_df$pred_area <- predict(area_model)
 
-ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
+ggplot(clean_df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
   geom_line(aes(y=pred_area, col='Модель'), size=5) +
-  geom_text(aes(x = 100, y=40000, label=))
+  geom_text(aes(x = 100, y=40000, label = "somelabel"))
 
 coef_a <- as.character(round(coef(area_model)[2], 2))
 coef_b <- as.character(round(coef(area_model)[1], 2))
-cor_coef <- as.character(round(cor(df$area, df$pred_area), 2))
+cor_coef <- as.character(round(cor(clean_df$area, clean_df$pred_area), 2))
 
 model_text <- paste("y = ", coef_a, " * x ", coef_b, ", R = ", cor_coef)
 model_text
 
-p <- ggplot(df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
+p <- ggplot(clean_df, aes(x=len)) + geom_point(aes(y=area, col='Факт'), size=5) +
   geom_line(aes(y=pred_area, col='Модель'), size=5) +
   geom_text(aes(x = 100, y=40000, label=model_text))
 p

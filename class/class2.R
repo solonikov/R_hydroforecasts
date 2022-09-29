@@ -76,12 +76,15 @@ ggplot(my_df_long, aes(x=value, fill=variable)) +
   stat_density(alpha = 0.9)
 
 ggplot(my_df_long, aes(x=id, y=value, col=variable)) +
-  geom_line() +
-  geom_point() 
+  geom_line(size=2) +
+  geom_point(size=3) +
+  facet_wrap(variable~., scales = "free_y") +
+  theme_light(base_size = 30)
 
 # факторы
 my_df_long$variable <- factor(my_df_long$variable)
 str(my_df_long)
+levels(my_df_long$variable)
 
 # графика
 library(ggplot2)

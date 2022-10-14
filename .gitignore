@@ -51,3 +51,6 @@ rsconnect/
 # Mac OS files
 .DS_Store
 ._*
+
+# R Plots images
+/class/plots/

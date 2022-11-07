@@ -6,6 +6,9 @@ setwd('/Volumes/T7/мои файлы с юлиного компьютера/R_
 source('class4_2022.r')
 prog_df <- df_final
 
+comment(prog_df) <- "Датафрейм с фактическими и прогнозными значениями гидрологических параметров"
+save(prog_df, file = "prog_df.RData")
+
 prog_df %>% 
   group_by(month) %>% 
   mutate(err = pred - fact) %>% 

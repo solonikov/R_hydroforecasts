@@ -54,3 +54,6 @@ rsconnect/
 
 # R Plots images
 /class/plots/
+
+# NetCDF data files
+/data/netcdf/

@@ -1,8 +1,10 @@
 library(prophet)
 library(ggplot2)
 library(lubridate)
+library(tidyr)
 library(dplyr)
-setwd('D:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/data/')
+#setwd('D:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/data/')
+setwd('data/')
 
 load('baikal/prog_df.RData')
 

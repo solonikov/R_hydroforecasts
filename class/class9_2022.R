@@ -19,7 +19,8 @@ acf(diff(b), plot = F) # то же самое
 b[1:2]
 diff(b)[1]
 
-setwd("D:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/data/baikal/")
+#setwd("D:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/data/baikal/")
+setwd('class/')
 load('prog_df.RData')
 
 # проверяем, если у нас данные наблюдений отсортированы неправильно по годам

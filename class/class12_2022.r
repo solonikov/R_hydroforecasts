@@ -7,7 +7,7 @@ library(reshape2)
 library(readxl)
 library(writexl)
 library(airGRteaching)
-setwd('d:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/')
+#setwd('d:/YandexDisk/ИВПРАН/R forecasts/2022/rforecast-main/')
 load('data/rivers/river_data.RData')
 load('data/rivers/weather_data.RData')
 
